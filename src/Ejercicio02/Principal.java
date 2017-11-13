@@ -86,6 +86,12 @@ public class Principal {
 
 		}
 		
+		
+		
+		/**
+		 * Método que crea un fichero xml de libros.
+		 * @param fichero
+		 */
 		public static void crearLibrosXML(File fichero) {
 			try {
 			DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
@@ -98,6 +104,7 @@ public class Principal {
 			
 			ArrayList <Libro> libros = getLibrosFichero(fichero);
 			
+			//Iterador que recorre los libros y genera los elementos del xml
 			Iterator it = libros.iterator();
 			while (it.hasNext()) {
 				Libro aux = (Libro) it.next();
@@ -131,7 +138,14 @@ public class Principal {
 			
 		}
 		
-		
+		/**
+		 * Método que nos ayuda a que el proceso de introducción de elementos en el xml
+		 * sea más rápico pasándole los parámetros.
+		 * @param elemento
+		 * @param valor
+		 * @param nodo
+		 * @param document
+		 */
 		private static void CrearElemento(String elemento, String valor, Element nodo, Document document) {
 			Element elem = document.createElement(elemento);
 			Text text = document.createTextNode(valor);
@@ -140,6 +154,11 @@ public class Principal {
 			nodo.appendChild(elem);
 		}
 
+		/**
+		 * Método que lee un fichero de objetos de tipo libro devuelve una lista de objetos de tipo libro
+		 * @param fichero
+		 * @return
+		 */
 		public static ArrayList<Libro> getLibrosFichero(File fichero) {
 			ArrayList <Libro> libros = new ArrayList<>();
 			Libro aux;

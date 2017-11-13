@@ -1,4 +1,4 @@
-package Ejercicio03;
+package Ejercicio04;
 
 import java.io.File;
 import java.io.IOException;
@@ -12,28 +12,30 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 public class Principal {
-/**
- * Método que lee un fichero xml y lo muestra por pantalla.
- */
+	/**
+	 * Método que lee un fichero xml y lo muestra por pantalla.
+	 */
 	public static void leerXML() {
 		try {
 			DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 			DocumentBuilder builder;
 			builder = factory.newDocumentBuilder();
-			Document document = builder.parse(new File("agenda.xml"));
+			Document document = builder.parse(new File("libros.xml"));
 			
 			document.getDocumentElement().normalize();
 			System.out.println("Elemento raíz: "+document.getDocumentElement().getNodeName());
+			
 			//Creamos una lista con todos los nodos contacto
-			NodeList contactos = document.getElementsByTagName("contacto");
+			NodeList libros = document.getElementsByTagName("libro");
 	
-			for (int i = 0; i < contactos.getLength(); i++) {
-				Node contacto = contactos.item(i); //Se obtiene un nodo
-				Element elemento = (Element) contacto;
-				System.out.println("Nombre: "+getNodo("nombre", elemento));
-				System.out.println("Apellido: "+getNodo("apellido", elemento));
-				System.out.println("Email: "+getNodo("email", elemento));
-				System.out.println("Teléfono: "+getNodo("telefono", elemento));
+			for (int i = 0; i < libros.getLength(); i++) {
+				Node libro = libros.item(i); //Se obtiene un nodo
+				Element elemento = (Element) libro;
+				System.out.println("ISBN: "+elemento.getAttribute("ISBN")); //Obtenemos el atributo del nodo libro
+				System.out.println("Titulo: "+getNodo("Titulo", elemento));
+				System.out.println("Autor: "+getNodo("Autor", elemento));
+				System.out.println("Editorial: "+getNodo("Editorial", elemento));
+				
 			}
 			
 		} catch (ParserConfigurationException e) {
@@ -55,6 +57,7 @@ public class Principal {
 	 */
 	public static String getNodo(String etiqueta, Element elem) {
 		Node nodo = elem.getElementsByTagName(etiqueta).item(0).getFirstChild();
+		
 		return nodo.getTextContent();
 	}
 

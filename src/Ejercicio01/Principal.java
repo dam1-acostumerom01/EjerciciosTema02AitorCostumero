@@ -30,6 +30,7 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Text;
 
 public class Principal {
+	//ruta del fichero.
 	private static final String sfichero = "agenda.dat";
 
 	// Método que pide por teclado un entero
@@ -119,6 +120,9 @@ public class Principal {
 
 	}
 
+	/**
+	 * Método que crea un documento xml con el método DOM
+	 */
 	public static void crearContactosXML() {
 
 		try {
@@ -166,6 +170,10 @@ public class Principal {
 
 	}
 
+	/**
+	 * Método que lee un fichero y devuelve un arraylist de objetos de tipo contacto.
+	 * @return
+	 */
 	public static ArrayList<Ejercicio01.Contacto> getContactosFichero() {
 		ArrayList<Ejercicio01.Contacto> contactos = new ArrayList<>();
 
@@ -196,6 +204,14 @@ public class Principal {
 		return contactos;
 	}
 
+	
+	/**
+	 * Método que crea elementos que formarán parte del xml
+	 * @param elemento
+	 * @param valor
+	 * @param nodo
+	 * @param document
+	 */
 	static void crearElemento(String elemento, String valor, Element nodo, Document document) {
 		Element elem = document.createElement(elemento);
 		Text text = document.createTextNode(valor);
@@ -204,9 +220,9 @@ public class Principal {
 	}
 
 	public static void main(String[] args) {
-		// File fichero = new File(sfichero);
-		// gestionarMenu(fichero);
-		crearContactosXML();
+		File fichero = new File(sfichero);
+		 gestionarMenu(fichero);
+		//crearContactosXML();
 
 	}
 }
